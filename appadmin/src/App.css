@@ -1,0 +1,377 @@
+:root {
+  --SideNav: #000;
+  --SideNavTextColor: white;
+}
+*:focus {
+  outline: none;
+}
+.taps {
+  width: 80%;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+}
+.app {
+  width: 100%;
+  height: 100vh;
+  padding: 100;
+  display: flex;
+}
+.marginLeft{
+  margin-left: 10px;
+}
+.ma-5-right{
+  margin-right: 10px;
+}
+
+/* ----------Side Nav---------- */
+.sideNavContainer {
+  width: 25%;
+  height: 100vh;
+  position: relative;
+  background: var(--SideNav);
+  color: var(--SideNavTextColor);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+.logOut {
+  position: absolute;
+  bottom: 20px;
+  padding: 20px 40px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  transition: 500ms ease-in-out;
+  cursor: pointer;
+}
+.btn {
+  padding: 10px 70px;
+  border-radius: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.logoutbtn {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+.logOut:hover {
+  border: 1px solid #0bb5ff;
+}
+.currentlocation {
+  border: 2px solid #0bb5ff;
+  background-color: #8360c3;
+  color: white;
+  font-weight: bold;
+}
+.otherLocation {
+  border: 2px solid transparent;
+  background-color: #fff;
+  color: #0bb5ff;
+  font-weight: bold;
+  transition: 500ms ease-in-out;
+}
+.otherLocation:hover {
+  border: 2px solid #8360c3;
+  background-color: #0bb5ff;
+  color: #fff;
+}
+.icon {
+  margin-right: 20px;
+}
+/* ----------Side Nav ends---------- */
+
+/* ----------OverView---------- */
+.overviewContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.cols {
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.hotelAdmins {
+  background-color: #8a2387;
+  padding: 20px 60px;
+  border-radius: 20px;
+  color: white;
+}
+.hotelMonthlyUsers {
+  background-color: rgba(236, 56, 188, 0.5);
+  padding: 20px 60px;
+  border-radius: 20px;
+  color: white;
+}
+.appUser {
+  background-color: #fc5c7d;
+  padding: 20px 60px;
+  border-radius: 20px;
+  color: white;
+}
+.monthlyAppUsers {
+  background-color: rgba(115, 3, 192, 0.5);
+  padding: 20px 60px;
+  border-radius: 20px;
+  color: white;
+}
+/* ----------OverView ends---------- */
+
+/* ----------Login ---------- */
+.loginContainer {
+  width: 100%;
+  height: 100%;
+}
+.imgContainder {
+  width: 100%;
+  height: 100%;
+  background: coral;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+.toplayer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .3);
+  z-index: 3;
+}
+.loginform {
+  position: absolute;
+  width: 45%;
+  height: 45%;
+  top: 25%;
+  left: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.logoholder {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  width: 30%;
+}
+.form{
+  width: 500px;
+  height: 300px;
+  background-color: white;
+  border-radius: 20px;
+  margin-top: 10px;
+  box-shadow: 3px 3px 3px black;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.textInputContainer{
+  width: 280px;
+  height: 50px;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.inputIcons{
+  display: flex;
+  align-items: center;
+}
+.inputs{
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 0 solid;
+  padding: 10px  20px;
+}
+.passwordbtn{
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+.signinbtn{
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: #0BB5FF;
+  padding: 10px 40px;
+  color: white;
+  border-radius: 10px;
+  transition: 500ms ease-in;
+  
+}
+.signinbtn:hover{
+  color: #0BB5FF;
+  background-color: white;
+  border: 1px solid #0bb5ff;
+
+}
+/* ----------Login end ---------- */
+
+
+
+
+/* ----------add admin---------- */
+.addAdminContainer{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.searchBar{
+  /* position: absolute;
+  top: 0; */
+  width: 100%;
+  padding: 20px 0;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.searchInputContainer{
+  border: 1px solid rgba(0, 0, 0, .3);
+  padding: 0px 50px;
+  border-radius: 20px;
+  width: 30%;
+}
+.addForm{
+  display: flex;
+  flex-wrap: wrap;
+}
+.addForm{
+  display: flex;
+  /* position: absolute; */
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  /* top: 100px; */
+  margin: 20px 0;
+  }
+  .addBtn{
+    width: 150px;
+    height: 40px;
+    margin-left: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #0276FD;
+    border-radius: 10px;
+    color: white;
+  }
+  .hotelList{
+    padding: 20px;
+  }
+  .hotelNavigation{
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .navBtn{
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  .next{
+    background-color: #0bb5ff;
+  }
+  .nextDis{
+    background-color: gray;
+  }
+  .prev{
+    background-color: #0bb5ff;
+  }
+  .prevDis{
+    background-color: gray;
+  }
+/* ----------add admin end---------- */
+
+
+
+/* ----------Hotel card ---------- */
+.hotelTap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 20px 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.hotelName{
+  width: 80%;
+  display: flex;
+  align-items: center ;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.btnHotel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.profileIconContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:  rgba(0, 0, 0, 0.2);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.profieIcon{
+  color: white;
+}
+.deleteIcon{
+  color: red;
+  transition: 500ms ease-in;
+}
+.reload{
+  color: #0BB5FF;
+  transition: 500ms ease-in;
+}
+.btnHotel:hover .deleteIcon{
+  transform: scale(1.3);
+}
+.btnHotel:hover .reload{
+  transform: scale(1.3);
+}
+.btnSetter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* ----------Hotel card end ---------- */

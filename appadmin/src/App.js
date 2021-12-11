@@ -8,7 +8,7 @@ function App() {
 
   const loginfunction=()=>{
     setLogin('yes')
-  }
+  } 
 
   return (
     <BrowserRouter>

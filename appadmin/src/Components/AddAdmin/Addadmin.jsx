@@ -9,6 +9,7 @@ import {
   faLock,
   faAngleLeft,
   faAngleRight,
+  faHotel
 } from "@fortawesome/free-solid-svg-icons";
 
 const hotels = [
@@ -23,7 +24,7 @@ const hotels = [
   { id: 9, name: "hotel 9" },
   { id: 10, name: "hotel 10" },
   { id: 11, name: "hotel 11" },
-];
+]; 
 
 const AddAdmin = () => {
   const [type, setType] = useState("password");
@@ -104,37 +105,51 @@ const AddAdmin = () => {
         </div>
       </div>
 
-      <div className="addForm">
-        <div className="inputHolder">
-          <div className="textInputContainer">
-            <div className="inputIcons">
-              <FontAwesomeIcon icon={faAt} />
-              <input placeholder="Email" className="inputs" type="email" />
+
+      <div className={'mainContainer'}>
+        
+        <div className="hotelList">
+          {hotelSlice.map((hotel, index) => (
+            <HotelsCard hotel={hotel} index={index + 1} />
+          ))}
+        </div>
+        <div className="addForm">
+          <div className="inputHolder">
+            <div className="textInputContainer">
+              <div className="inputIcons">
+                <FontAwesomeIcon icon={faHotel} />
+                <input placeholder="Hotel Name" className="inputs" type="text" />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="inputHolder marginLeft">
-          <div className="textInputContainer">
-            <div className="inputIcons">
-              <FontAwesomeIcon icon={faLock} />
-              <input placeholder="Password" className="inputs" type={type} />
-              <button
-                type="button"
-                onClick={() => passwordVisibility()}
-                className="passwordbtn"
-              >
-                <EyeChanger />
-              </button>
+          <div className="inputHolder">
+            <div className="textInputContainer">
+              <div className="inputIcons">
+                <FontAwesomeIcon icon={faAt} />
+                <input placeholder="Email" className="inputs" type="email" />
+              </div>
             </div>
           </div>
+          <div className="inputHolder">
+            <div className="textInputContainer">
+              <div className="inputIcons">
+                <FontAwesomeIcon icon={faLock} />
+                <input placeholder="Password" className="inputs" type={type} />
+                <button
+                  type="button"
+                  onClick={() => passwordVisibility()}
+                  className="passwordbtn"
+                >
+                  <EyeChanger />
+                </button>
+              </div>
+            </div>
+          </div>
+          <button className="addBtn">Add Hotel Admin</button>
         </div>
-        <button className="addBtn">Add Hotel Admin</button>
       </div>
-      <div className="hotelList">
-        {hotelSlice.map((hotel, index) => (
-          <HotelsCard hotel={hotel} index={index + 1} />
-        ))}
-      </div>
+
+
       <div className="hotelNavigation">
         <button
           className={`navBtn  ${prevBtn ? "prevDis" : "prev"}`}

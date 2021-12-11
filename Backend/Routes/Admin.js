@@ -5,7 +5,7 @@ const router = express.Router();
 router.route('/adminSignIn').post(SignIn)
 router.route('/adminSignUp').post(SignUp)
 router.route('/addNewHotel').post(addHotel)
-router.route('/').get(viewHotels)
+router.route('/').get(viewHotels) 
 
 export default router
 

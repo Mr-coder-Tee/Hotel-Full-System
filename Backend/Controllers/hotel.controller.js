@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import hotel from "../Models/adminHotelUser.model.js";
 import Listing from "../Models/hotels.model.js";
-import bookingTable from '../Models/hotelbooking.model.js'
+import bookingTable from "../Models/hotelbooking.model.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -41,11 +41,10 @@ export const AddNewListing = async (req, res) => {
     galary,
     paymentMethods
   } = req.body;
-  const logedInEmail = await hotel.findOne({ _id:hotelID });
+  const logedInEmail = await hotel.findOne({ _id: hotelID });
   // const logedInEmail = await hotel.findOne({ hotelname:"Relax Inn" });
-  
 
-  //check loged in user or authenticate   
+  //check loged in user or authenticate
   if (!logedInEmail)
     return res.json({
       status: "400",
@@ -141,47 +140,112 @@ export const updateDetails = async (req, res) => {
   }
 };
 
-export const bookings=async(req,res)=>{
+export const bookings = async (req, res) => {
   const { id } = req.params;
 
-  const hotel= await UserModel.findOne({_id:id})
+  const hotels = await hotel.findOne({ _id: id });
 
-  if(!hotel){
+  if (!hotels) {
     res.json({
-      status:"Error",
-      message:"Please make sure you are logged in"
-    })
+      status: "Error",
+      message: "Please make sure you are logged in"
+    });
   }
 
-  const guests=await bookingTable.findOne({hotelID:id});
+  const guests = await bookingTable.findOne({ hotelID: id });
 
-  if(guests.length==0){
+  if (guests.length == 0) {
     res.json({
-      status:"Empty, never booked before",
-      message:"No trips",
-      data:[]
-    })
+      status: "Empty, never booked before",
+      message: "No trips",
+      data: []
+    });
   }
 
-  var guestsBooking=[]
-  guests.booking.map((_trip)=>{
-    if(_trip.checkInDetails.isCheckedOut===false){
-      guestsBooking.push(_trip)
+  var guestsBooking = [];
+  guests.booking.map((_trip) => {
+    if (_trip.checkInDetails.isCheckedOut === false) {
+      guestsBooking.push(_trip);
     }
-  })
+  });
 
-  if(guestsBooking.length===0){
+  if (guestsBooking.length === 0) {
     return res.json({
-      status:"Empty, never booked before",
-      message:"No trips",
-      data:[]
-    })
+      status: "Empty, never booked before",
+      message: "No booking",
+      data: []
+    });
   }
 
   res.json({
-    status:"Results",
-    message:"Current booking",
-    data:guestsBooking
-  })
+    status: "Results",
+    message: "Current bookings",
+    data: guestsBooking
+  });
+};
 
+export const bookingHistory = async (req, res) => {
+  const { id } = req.params;
+  const hotels = await hotel.findOne({ _id: id });
+
+  if (!hotels) {
+    res.json({
+      status: "Error",
+      message: "Please make sure you are logged in"
+    });
+  }
+
+  const guests = await bookingTable.findOne({ hotelID: id });
+
+  if (guests.length == 0) {
+    res.json({
+      status: "Empty, never booked before",
+      message: "No history",
+      data: []
+    });
+  }
+
+  var guestsBooking = [];
+  guests.booking.map((_trip) => {
+    if (_trip.checkInDetails.isCheckedOut === true) {
+      guestsBooking.push(_trip);
+    }
+  });
+
+  if (guestsBooking.length === 0) {
+    return res.json({
+      status: "Empty, never booked before",
+      message: "No history",
+      data: []
+    });
+  }
+
+  res.json({
+    status: "Results",
+    message: "Current history",
+    data: guestsBooking
+  });
+};
+
+
+export const getUserHistory=async(req,res)=>{
+    const {hotelid,userid}=req.params;
+    const booking=await bookingTable.find({hotelID:hotelid,userID:userid})
+ 
+
+    //not working
+
+    if(!booking.length==0){
+      return res.json({
+        status:"No history",
+        message:"No history",
+        data:[]
+      })
+    }
+
+    res.json({
+      status:"history",
+      message:"history",
+      data:booking
+    })
 }

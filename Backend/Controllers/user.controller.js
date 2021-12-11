@@ -244,14 +244,15 @@ export const getAllTrips = async (req, res) => {
 export const mytrips = async (req, res) => {
   const { userid,hotelid } = req.params;
   const user= await UserModel.findOne({_id:userid})
+  
   if(!user){
     res.json({
       status:"Error",
       message:"Please make sure you are logged in"
     })
   }
-  const hotel = await hotel.findOne({ _id:hotelid });
-  if(!hotel){
+  const hotels = await hotel.findOne({ _id:hotelid });
+  if(!hotels){
     res.json({
       status:"Error",
       message:"Error happen while fetching hotel details"
@@ -259,51 +260,69 @@ export const mytrips = async (req, res) => {
   }
 
 
-  const trips=await bookingTable.find({userID:id});
+  const trips=await bookingTable.find({userID:userid,hotelID:hotelid});
 
-  // var allBooking=[]
-  // trips.booking.map((_trip)=>{
-  //   if(_trip.checkInDetails.isCheckedOut===false){
-  //     allBooking.push(_trip)
-  //   }
-  // })
+  var allBooking=[]
+  trips[0].booking.map((_trip)=>{
+    if(_trip.checkInDetails.isCheckedOut===false){
+      allBooking.push(_trip)
+    }
+  })
 
-  // if(allBooking.length===0){
-  //   return res.json({
-  //     status:"Empty, never booked before",
-  //     message:"No trips",
-  //     data:[]
-  //   })
-  // }
+  if(allBooking.length===0){
+    return res.json({
+      status:"Empty, never booked before",
+      message:"No trips",
+      data:[]
+    })
+  }
 
-  // res.json({
-  //   status:"Results",
-  //   message:"Current booking",
-  //   data:allBooking
-  // })
+  res.json({
+    status:"Results",
+    message:"Current booking",
+    data:allBooking
+  })
 
 };
 export const history = async (req, res) => {
-  const { id } = req.params;
-  // var allBooking=[]
-  // trips.booking.map((_trip)=>{
-  //   if(_trip.checkInDetails.isCheckedOut===true){
-  //     allBooking.push(_trip)
-  //   }
-  // })
+  const { userid,hotelid } = req.params;
+  const user= await UserModel.findOne({_id:userid})
+  
+  if(!user){
+    res.json({
+      status:"Error",
+      message:"Please make sure you are logged in"
+    })
+  }
+  const hotels = await hotel.findOne({ _id:hotelid });
+  if(!hotels){
+    res.json({
+      status:"Error",
+      message:"Error happen while fetching hotel details"
+    })
+  }
 
-  // if(allBooking.length===0){
-  //   return res.json({
-  //     status:"Empty",
-  //     message:"No history",
-  //     data:[]
-  //   })
-  // }
 
-  // res.json({
-  //   status:"Results",
-  //   message:"Current booking",
-  //   data:allBooking
-  // })
+  const trips=await bookingTable.find({userID:userid,hotelID:hotelid});
+  var allBooking=[]
+  trips[0].booking.map((_trip)=>{
+    if(_trip.checkInDetails.isCheckedOut===true){
+      allBooking.push(_trip)
+    }
+  })
+
+  if(allBooking.length===0){
+    return res.json({
+      status:"Empty",
+      message:"No history",
+      data:[]
+    })
+  }
+
+  res.json({
+    status:"Results",
+    message:"Current booking",
+    data:allBooking
+  })
 
 };

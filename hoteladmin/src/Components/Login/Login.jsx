@@ -8,7 +8,7 @@ import {
   faLock,
   faLongArrowAltRight,
 } from "@fortawesome/free-solid-svg-icons";
-
+ 
 const LoginPage = () => {
   const [type, setType] = useState("password");
   const EyeChanger = () =>

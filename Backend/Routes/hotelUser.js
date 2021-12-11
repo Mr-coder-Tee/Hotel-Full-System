@@ -16,7 +16,7 @@ router.route("/addListing").post(auth, AddNewListing);
 router.route("/getHotel/:hotelname").get(auth, getHotelList);
 router.route("/updatedatails/:id").post(auth, updateDetails);
 router.route("/bookings/:id").get(auth, bookings);
-router.route("/bookingshistory/:id").get(auth, bookingHistory);
+router.route("/bookingshistory/:id").get(auth, bookingHistory); 
 router.route("/userhistory/:hotelid/:userid").get(auth, getUserHistory);
 
 export default router;

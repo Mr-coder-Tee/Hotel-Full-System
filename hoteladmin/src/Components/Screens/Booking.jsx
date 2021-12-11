@@ -7,7 +7,7 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
 const Booking = () => {
   return (
     <div className="bookingContainer">
-      <TopNav />
+      <TopNav searchby="booking"/>
       <div style={{padding:20}}>
         <h4>
           <FontAwesomeIcon icon={faBook} style={{ marginRight: 20 }} />

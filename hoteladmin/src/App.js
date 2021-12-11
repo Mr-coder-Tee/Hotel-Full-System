@@ -1,5 +1,5 @@
 import "./App.css";
-import { LoginPage, SideNav } from "./Components/index";
+import { LoginPage, SideNav,Profile } from "./Components/index";
 import {
   Booking,
   Guests,
@@ -9,7 +9,7 @@ import {
   Clients,
   Contacts,
 } from "./Components/Screens/index";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
           <Route path="/Clients" element={<Clients />} />
           <Route path="/Contacts" element={<Contacts />} />
           <Route path="/Listing" element={<Listing />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </div>
     </BrowserRouter>

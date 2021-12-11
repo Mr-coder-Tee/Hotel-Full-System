@@ -9,13 +9,18 @@ const hotelUser = new Schema(
       unique: true,
       trim: true
     },
-    phonenumber: {
-      type: String
-    },
     hotelname: {
       type: String,
       unique: true,
       required: true,
+    },
+    
+    password: {
+      type: String,
+      required: true
+    },
+    phonenumber: {
+      type: String
     },
     location: [
       {
@@ -27,18 +32,18 @@ const hotelUser = new Schema(
         }
       }
     ],
-    password: {
-      type: String,
-      required: true
-    },
     hoteladdress: {
         address: { type: String },
         city: { type: String },
-        postalCode: { type: String },
+        postalCode: { type: String }, 
         country: { type: String },
     },
     hotelAvatar: {
         type: String
+    },
+    disabled:{
+        type:Boolean,
+        default:false
     }
   },
   {
@@ -46,6 +51,6 @@ const hotelUser = new Schema(
   }
 );
 
-const hotel = mongoose.model("hotels", hotelUser);
+const hotel = mongoose.model("HotelTable", hotelUser);
 
 export default hotel;

@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import hotel from "../Models/adminHotelUser.model.js";
 import Listing from "../Models/hotels.model.js";
+import bookingTable from '../Models/hotelbooking.model.js'
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -30,46 +31,52 @@ export const getHotelList = async (req, res) => {
 
 export const AddNewListing = async (req, res) => {
   const {
-    hotelname,
+    hotelID,
     email,
     description,
     room,
     price,
+    avaliableDate,
     facilities,
     galary,
-    reviews,
-    avaliableDate,
-    hoteladdress
+    paymentMethods
   } = req.body;
-  const logedInEmail = await hotel.findOne({hotelname});
+  const logedInEmail = await hotel.findOne({ _id:hotelID });
+  // const logedInEmail = await hotel.findOne({ hotelname:"Relax Inn" });
+  
 
-//check loged in user or authenticate
-
+  //check loged in user or authenticate   
   if (!logedInEmail)
     return res.json({
       status: "400",
       message: "Please Login to use our services"
     });
+  // if (!logedInEmail._id) {
+  //   return res.json({
+  //     status: "404",
+  //     message: "Please update all relevent details before you can add a hotel"
+  //   });
+  // }
+  if (!logedInEmail.hoteladdress.city) {
+    return res.json({
+      status: "404",
+      message: "Please update all relevent details before you can add a hotel"
+    });
+  }
 
-    if(!logedInEmail.hoteladdress.city){
-      return res.json({
-        status: "404",
-        message: "Please register all your details before you can add a hotel"
-      })
-    }
+  const city = logedInEmail.hoteladdress.city;
 
   const newListing = new Listing({
-    hotelname,
+    hotelID,
     email,
     description,
     room,
     price,
     facilities,
     galary,
-    reviews,
     avaliableDate,
-    hoteladdress,
-    city:logedInEmail.hoteladdress.city
+    city,
+    paymentMethods
   });
 
   newListing
@@ -106,7 +113,7 @@ export const HotelLogIn = async (req, res) => {
       message: "Incorrect credentials"
     });
 
-  const token = jwt.sign({isExist}, secret, {
+  const token = jwt.sign({ isExist }, secret, {
     expiresIn: "7 days"
   });
 
@@ -114,51 +121,67 @@ export const HotelLogIn = async (req, res) => {
     status: "200",
     data: isExist,
     token: token,
-    result:isExist,token
+    result: isExist,
+    token
   });
 };
 
-export const RegisterHotel = async (req, res) => {
-  const { email, password, hotelname } = req.body;
-
-  const phonenumber = "";
-  const hoteladdress = {
-    address: "",
-    city: "",
-    postalCode: "",
-    country :""
-  };
-
-  const hotelAvatar = "";
-  const latitude = "";
-  const longitude = "";
-  const hashpassword = await bcrypt.hashSync(password);
-
-  const newHotel = new hotel({
-    email,
-    password: hashpassword,
-    phonenumber,
-    hotelname,
-    hoteladdress,
-    hotelAvatar,
-    location: { latitude, longitude }
-  });
-  newHotel
-    .save()
-    .then(async(data) =>
-    {
-      const token= await jwt.sign({data}, secret, { expiresIn: "7 days" })
-      res.json({
-        status: "Hotel added",
-        message: "Hotel has been succefully added to the database",
-        data: data,
-        token: token,
-        result:data,token
-      })}
-    )
-    .catch((err) =>
-      res.status(400).json({
-        message: `${err}`
-      })
+export const updateDetails = async (req, res) => {
+  const { id } = req.params;
+  const updatedInfo = req.body;
+  try {
+    const updateHotelInfo = await hotel.findByIdAndUpdate(
+      { _id: id },
+      updatedInfo,
+      { new: true }
     );
+    res.json({ result: updateHotelInfo });
+  } catch (error) {
+    res.json({ message: error });
+  }
 };
+
+export const bookings=async(req,res)=>{
+  const { id } = req.params;
+
+  const hotel= await UserModel.findOne({_id:id})
+
+  if(!hotel){
+    res.json({
+      status:"Error",
+      message:"Please make sure you are logged in"
+    })
+  }
+
+  const guests=await bookingTable.findOne({hotelID:id});
+
+  if(guests.length==0){
+    res.json({
+      status:"Empty, never booked before",
+      message:"No trips",
+      data:[]
+    })
+  }
+
+  var guestsBooking=[]
+  guests.booking.map((_trip)=>{
+    if(_trip.checkInDetails.isCheckedOut===false){
+      guestsBooking.push(_trip)
+    }
+  })
+
+  if(guestsBooking.length===0){
+    return res.json({
+      status:"Empty, never booked before",
+      message:"No trips",
+      data:[]
+    })
+  }
+
+  res.json({
+    status:"Results",
+    message:"Current booking",
+    data:guestsBooking
+  })
+
+}

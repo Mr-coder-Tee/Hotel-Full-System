@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 
 import router from './Routes/hotelUser.js'
 import UserRouter from './Routes/users.js'
+import adminRouter from './Routes/Admin.js'
 
 
 dotenv.config()
@@ -33,6 +34,7 @@ connection.once('open',()=>{
 
 app.use('/hotel',router)
 app.use('/user',UserRouter)
+app.use('/apiAdmin',adminRouter)
 
 
 

@@ -16,6 +16,11 @@ const TextInputs = ({ ...props }) => {
   const [editInput, setEditInput] = useState(editable);
   // console.log('>>>>>',props)
 
+
+ 
+
+
+
   return (
     <View
       style={{

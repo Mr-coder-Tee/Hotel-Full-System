@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const hotelListing = new Schema({
-  hotelname: {
+  hotelID: {
     required: true,
     type: String
   },
-  email:{
+  email: {
     required: true,
     type: String
   },
-  city:{
+  city: {
     required: true,
     type: String
   },
@@ -33,61 +33,42 @@ const hotelListing = new Schema({
   price: {
     type: Number
   },
-  avaliableDate:{
-      startDate:{
-        required: true,
-          type: String
-      },
-      endDate:{
-        required: true,
-          type: String
-      }
+  avaliableDate: {
+    startDate: {
+      required: true,
+      type: Date
+    },
+    endDate: {
+      required: true,
+      type: Date
+    }
   },
   facilities: [
     {
-      facility: {
-        name: {
-          required: true,
-          type: String
-        },
-        iconname: {
-          required: true,
-          type: String
-        },
-        icontype: {
-          required: true,
-          type: String
-        }
+      name: {
+        required: true,
+        type: String
+      },
+      iconname: {
+        required: true,
+        type: String
+      },
+      icontype: {
+        required: true,
+        type: String
       }
     }
   ],
   galary: [String],
-  reviews: [
-    {
-      stars: {
-        required: true,
-        type: Number
-      },
-      commment: {
-        required: true,
-        type: String
-      },
-      username: {
-        required: true,
-        type: String
-      },
-      useravatar: {
-        required: true,
-        type: String
-      }
-    },
-  ],
   postAt: {
     type: Date,
     default: new Date()
-  }
+  },
+  paymentMethods: [
+    String
+  ]
 });
 
-const Listing = mongoose.model("Listings", hotelListing);
+const Listing = mongoose.model("HotelRooms", hotelListing);
 
 export default Listing;

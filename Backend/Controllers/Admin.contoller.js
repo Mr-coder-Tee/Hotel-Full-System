@@ -50,6 +50,22 @@ export const addHotel = async (req, res) => {
   const hoteladdress = { address: "", city: "", postalCode: "", country: "" };
   const hotelAvatar = "";
 
+  const checkEmialExist= await Hotel.findOne({email})
+  const checkhotelExist= await Hotel.findOne({hotelname})
+
+  if(checkEmialExist){
+    return res.json({
+      status: "Error",
+      message: "email name must be unique",
+    });
+  }
+  if(checkhotelExist){
+    return res.json({
+      status: "Error",
+      message: "hotel name must be unique",
+    });
+  }
+
   const hashpassword = await bcrypt.hashSync(password);
 
   const newHotel = new Hotel({

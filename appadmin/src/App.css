@@ -92,7 +92,6 @@
 
 /* ----------OverView---------- */
 .overviewContainer {
-  width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -242,6 +241,7 @@ img {
   justify-content: space-around;
   align-items: center;
   padding: 20px;
+  height: calc(100% - 175px);
 }
 
 
@@ -251,7 +251,6 @@ img {
 
 /* ----------add admin---------- */
 .addAdminContainer{
-  width: 100%;
   height: 100%;
   position: relative;
 }
@@ -294,9 +293,18 @@ img {
     color: white;
     align-self: center;
   }
+  .gray{
+    background-color: gray !important;
+  }
   .hotelList{
     padding: 20px;
-    width: 60%;
+    width: 70%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
   }
   .hotelNavigation{
     padding: 20px;
@@ -327,21 +335,46 @@ img {
 
 /* ----------Hotel card ---------- */
 .hotelTap{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  cursor: pointer;
+  width: calc(100% / 3.5);
+  height: calc(100% / 3);
   border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 20px 10px;
   border-radius: 10px;
   margin-top: 10px;
+  margin-left: 5px;
+  overflow: hidden;
+}
+.imgContainer{
+  width: 100%;
+  height: 60%;
+  position: relative;
+}
+.nameContainer{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .hotelName{
-  width: 80%;
+  width: 100%;
   display: flex;
   align-items: center ;
   margin-left: 10px;
   margin-right: 10px;
+  overflow: hidden;
+}
+.lockbtn{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, .5);
+  transition: 500ms ease-in;
+
 }
 .btnHotel{
   display: flex;
@@ -356,15 +389,6 @@ img {
   cursor: pointer;
 }
 
-.profileIconContainer{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color:  rgba(0, 0, 0, 0.2);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
 .profieIcon{
   color: white;
 }
@@ -377,10 +401,13 @@ img {
   transition: 500ms ease-in;
 }
 .btnHotel:hover .deleteIcon{
-  transform: scale(1.3);
+  transform: scale(1.1);
 }
-.btnHotel:hover .reload{
-  transform: scale(1.3);
+.lockbtn:hover {
+  transform: scale(1.1);
+}
+.lockbtn:hover .reload{
+  transform: scale(1.1);
 }
 .btnSetter{
   display: flex;

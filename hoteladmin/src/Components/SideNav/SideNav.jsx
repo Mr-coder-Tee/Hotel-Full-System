@@ -12,14 +12,21 @@ import {
   faPhoneVolume,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const SideNav = () => {
+  const navigate=useNavigate()
+
+  const logOut=()=>{
+    localStorage.removeItem("userToken")
+    navigate('/')
+  }
   return (
     <div className="sideNav">
       <img src={image} />
       <div className="bookingSection">
         <h3>Booking</h3>
-        <TabButtons name="Booking" icon={faBook} getLocation="/" />
+        <TabButtons name="Booking" icon={faBook} getLocation="/booking" />
         <TabButtons name="Guests" icon={faBed} getLocation="/Guests" />
       </div>
       <div className="bookingSection">
@@ -39,7 +46,7 @@ const SideNav = () => {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column",position:'absolute',bottom:50,cursor:'pointer' }}>
-        <div className="logOutBtn">
+        <div className="logOutBtn" onClick={()=>logOut()}>
           <FontAwesomeIcon icon={faSignOutAlt} className="logOutIcon" />
           Log Out
         </div>

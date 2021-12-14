@@ -3,14 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 const BookingCard = () => {
- const btn="checkin"
-    const Button=()=>(
-        
-            btn==="checkin"?(<button>check in</button>):(<button>cancel booking</button>)
-        
-    )
-
-
+  const btn = "checkin";
+  const Button = () =>
+    btn === "checkin" ? (
+      <button>check in</button>
+    ) : (
+      <button>cancel booking</button>
+    );
 
   return (
     <div className="bookingCardContainer ">
@@ -34,8 +33,8 @@ const BookingCard = () => {
           <p>24 Nov 2021-27 Nov 2021</p>
         </div>
         <div>
-            <p>Payed</p>
-            <Button/>
+          <p>Payed</p>
+          <Button />
         </div>
       </div>
     </div>

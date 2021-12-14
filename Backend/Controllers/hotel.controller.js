@@ -105,6 +105,7 @@ export const HotelLogIn = async (req, res) => {
     });
 
   const isPassword = await bcrypt.compare(password, isExist.password);
+  
 
   if (!isPassword)
     return res.json({
@@ -116,18 +117,19 @@ export const HotelLogIn = async (req, res) => {
     expiresIn: "7 days"
   });
 
+ 
+  //store token local storage
   res.json({
     status: "200",
     data: isExist,
     token: token,
-    result: isExist,
-    token
   });
 };
 
 export const updateDetails = async (req, res) => {
   const { id } = req.params;
   const updatedInfo = req.body;
+  console.log(updatedInfo,'id',id)
   try {
     const updateHotelInfo = await hotel.findByIdAndUpdate(
       { _id: id },
@@ -247,5 +249,26 @@ export const getUserHistory=async(req,res)=>{
       status:"history",
       message:"history",
       data:booking
+    })
+}
+
+export const getUser=async (req,res)=>{
+
+    const{token}=req.params
+   
+    await jwt.verify(token,secret,(err, verifiedJwt)=>{
+      if(err){
+        return res.json({
+          status:'Error',
+          message:err,
+          error:'An error occured'
+        })
+      }else{
+
+        return res.json({
+          status:'Success',
+          data:verifiedJwt,
+        })
+      }
     })
 }

@@ -87,7 +87,8 @@ export const addHotel = async (req, res) => {
       res.json({
         status: "200",
         message: "new hotel successful added",
-        data: data
+        data: data,
+        token:token
       });
     })
     .catch((error) => {

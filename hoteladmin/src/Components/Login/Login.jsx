@@ -6,11 +6,16 @@ import {
   faEyeSlash,
   faAt,
   faLock,
-  faLongArrowAltRight,
+  faLongArrowAltRight
 } from "@fortawesome/free-solid-svg-icons";
- 
+import HotelAPI from "../../ApiCalls/apiCalls";
+import { useNavigate } from "react-router-dom";
+
 const LoginPage = () => {
+  const navigate=useNavigate();
   const [type, setType] = useState("password");
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const EyeChanger = () =>
     type === "password" ? (
       <FontAwesomeIcon icon={faEye} />
@@ -24,6 +29,20 @@ const LoginPage = () => {
     } else {
       setType("password");
     }
+  };
+
+  // HotelAPI.login()
+
+  
+  const loginprocess = () => {
+    HotelAPI.login({ email, password })
+    .then(({ data }) => {
+      // localStorage.removeItem("userToken");
+      localStorage.setItem("userToken", data.token);
+      navigate('/booking')
+      
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -44,18 +63,29 @@ const LoginPage = () => {
               marginBottom: 20,
               marginTop: 10,
               fontFamily: "monospace",
-              fontSize: 34,
+              fontSize: 34
             }}
           >
             Sign In
           </h2>
           <div className="inputContainer">
             <FontAwesomeIcon icon={faAt} />
-            <input placeholder="Email" className="input" />
+            <input
+              placeholder="Email"
+              className="input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className="inputContainer">
             <FontAwesomeIcon icon={faLock} />
-            <input placeholder="Password" className="input" type={type} />
+            <input
+              placeholder="Password"
+              className="input"
+              type={type}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <button
               type="button"
               className="passwordBtn"
@@ -64,7 +94,9 @@ const LoginPage = () => {
               <EyeChanger />
             </button>
           </div>
-          <div style={{display:'flex',justifyContent:'right',marginTop:20}}>
+          <div
+            style={{ display: "flex", justifyContent: "right", marginTop: 20 }}
+          >
             <button
               style={{
                 display: "flex",
@@ -74,8 +106,9 @@ const LoginPage = () => {
                 borderRadius: 10,
                 border: "none",
                 backgroundColor: "#0BB5FF",
-                color: "white",
+                color: "white"
               }}
+              onClick={() => loginprocess()}
             >
               Sign in
               <FontAwesomeIcon

@@ -6,16 +6,14 @@ import HotelAPI from "../../ApiCalls/apiCalls";
 
 const TopNav = ({ searchby }) => {
   const location = useLocation();
-  const userToken = localStorage.getItem("userToken");
+  const _id = localStorage.getItem("userID");
   const [userData, setUserData] = useState();
-  const [img, setImg] = useState();
-
   useEffect(() => {
     const getUserData = async () => {
-      if (userToken) {
-        HotelAPI.getUserDetails(userToken)
-          .then(({ data }) => {
-            setUserData(data.data.isExist);
+      if (_id) {
+        HotelAPI.getUserDetails(_id)
+          .then(( {data} ) => {
+            setUserData(data.data);
             
           })
           .catch((err) => console.log(err));
@@ -24,8 +22,6 @@ const TopNav = ({ searchby }) => {
       getUserData();
     }, []);
     
-    // setImg(userData?.hotelname);
-  // console.log("topnav", userData);
   return (
     <div
       className={`topNavContainer ${searchby ? "flexSpaceBetween" : "flexEnd"}`}

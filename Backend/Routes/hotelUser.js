@@ -12,7 +12,7 @@ import {
 } from "../Controllers/hotel.controller.js";
 import auth from "../middleware/auth.js";
 
-router.route("/:token").get(auth,getUser);
+router.route("/:_id").get(auth,getUser);
 router.route("/hotellogin").post(HotelLogIn);
 router.route("/addListing").post(auth, AddNewListing);
 router.route("/getHotel/:hotelname").get(auth, getHotelList);

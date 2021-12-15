@@ -18,7 +18,7 @@ const SideNav = () => {
   const navigate=useNavigate()
 
   const logOut=()=>{
-    localStorage.removeItem("userToken")
+    localStorage.removeItem("userID")
     navigate('/')
   }
   return (

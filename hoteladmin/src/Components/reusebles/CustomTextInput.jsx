@@ -36,7 +36,7 @@ const CustomTextInput = ({ ...props }) => {
 
   useEffect(()=>{
 
-    if(enableEdit&&(placeholder === "Password" || placeholder === "Confirm Password")){
+    if(enableEdit&&(placeholder === "Current Password" || placeholder === "New Password")){
         setFeildType('password')
     }
 
@@ -52,7 +52,7 @@ const CustomTextInput = ({ ...props }) => {
         type={feildType}
         onChange={(e) => onChange(e.target.value)}
       />
-      {(placeholder === "Password" || placeholder === "Confirm Password") && (
+      {(placeholder === "Current Password" || placeholder === "New Password") && (
         <Eye />
       )}
       <button className="editBtn" onClick={() => changeEditMode()}>

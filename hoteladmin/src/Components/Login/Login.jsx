@@ -36,9 +36,8 @@ const LoginPage = () => {
   
   const loginprocess = () => {
     HotelAPI.login({ email, password })
-    .then(({ data }) => {
-      // localStorage.removeItem("userToken");
-      localStorage.setItem("userToken", data.token);
+    .then(({data}) => {
+      localStorage.setItem("userID", data.data._id);
       navigate('/booking')
       
       })

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const hotelUser = new Schema(
@@ -12,9 +12,9 @@ const hotelUser = new Schema(
     hotelname: {
       type: String,
       unique: true,
-      required: true,
+      required: true
     },
-    
+
     password: {
       type: String,
       required: true
@@ -22,28 +22,26 @@ const hotelUser = new Schema(
     phonenumber: {
       type: String
     },
-    location: [
-      {
-        longitude: {
-          type: String
-        },
-        latitude: {
-          type: String
-        }
+    location: {
+      longitude: {
+        type: String
+      },
+      latitude: {
+        type: String
       }
-    ],
+    },
     hoteladdress: {
-        address: { type: String },
-        city: { type: String },
-        postalCode: { type: String }, 
-        country: { type: String },
+      address: { type: String },
+      city: { type: String },
+      postalCode: { type: String },
+      country: { type: String }
     },
     hotelAvatar: {
-        type: String
+      type: String
     },
-    disabled:{
-        type:Boolean,
-        default:false
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   {

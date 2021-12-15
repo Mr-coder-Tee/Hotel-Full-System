@@ -8,7 +8,6 @@ const TabButtons = ({ name, icon,getLocation }) => {
 
     const [currectLocation,setCurrentLocatioin]=useState('/')
 
-    console.log(getLocation,"--->",location.pathname)
   return (
     <Link to={getLocation} className={`sideNavTabs ${location?.pathname===getLocation?'tapped':'upTapped'}`}>
       <FontAwesomeIcon icon={icon} style={{marginRight:20}}/>

@@ -5,8 +5,8 @@ class HotelAPI {
   async login(data) {
     return axios.post(url + "/hotellogin", data);
   }
-  async getUserDetails(token) {
-    return axios.get(`${url}/${token}`);
+  async getUserDetails(_id) {
+    return axios.get(`${url}/${_id}`);
   }
   async updateUserInfo(data, id) {
     return axios.post(`${url}/updatedatails/${id}`, data);

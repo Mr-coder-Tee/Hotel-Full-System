@@ -8,12 +8,12 @@ import {
   Reviews,
   Notifications,
   Clients,
-  Contacts
+  Contacts,
+  AddListing
 } from "./Components/Screens/index";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  
   const [user, setUser] = useState();
   useEffect(() => {
     const varifyUser = async () => {
@@ -37,8 +37,9 @@ function App() {
               <Route path="/Clients" element={<Clients />} />
               <Route path="/Contacts" element={<Contacts />} />
               <Route path="/Listing" element={<Listing />} />
+              <Route path="/Listing/add" element={<AddListing />} />
               <Route path="/Profile" element={<Profile />} />
-              </Routes>
+            </Routes>
           </>
         ) : (
           <Routes>

@@ -5,6 +5,7 @@ import Reviews from "./Reviews";
 import Notifications from "./Notifications";
 import Clients from "./Clients";
 import Contacts from "./Contacts";
+import AddListing from "./AddListing";
 
 export{
     Booking,Guests,Listing,
@@ -12,4 +13,5 @@ export{
     Notifications,
     Clients,
     Contacts,
+    AddListing
 }

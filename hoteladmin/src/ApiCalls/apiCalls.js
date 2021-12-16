@@ -11,6 +11,9 @@ class HotelAPI {
   async updateUserInfo(data, id) {
     return axios.post(`${url}/updatedatails/${id}`, data);
   }
+  async getHotelListing(id){
+      return axios.get(`${url}/getHotel/${id}`)
+  }
 }
 
 export default new HotelAPI();

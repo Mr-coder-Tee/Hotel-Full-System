@@ -13,7 +13,7 @@ export const getHotelList = async (req, res) => {
   const currenthotel = await hotel.findOne({
     hotelname
   });
-
+  // console.log(currenthotel._id)
   if (!currenthotel) {
     return res.json({
       status: "404",
@@ -21,7 +21,12 @@ export const getHotelList = async (req, res) => {
       data: []
     });
   }
-  const myListing = await Listing.find({ hotelname });
+  const myListing = await Listing.find({ hotelID: currenthotel._id});
+  // console.log(myListing)
+
+  if(myListing.length===0){
+    return res.json({message:"No postings",data:[]})
+  }
   res.json({
     status: "200",
     message: "Posing Avalible",
@@ -127,7 +132,13 @@ export const HotelLogIn = async (req, res) => {
 export const updateDetails = async (req, res) => {
   const { id } = req.params;
   const updatedInfo = req.body;
+
+
   console.log(updatedInfo);
+
+  if(updatedInfo.password){
+     return console.log('trying to update password')
+  }
   try {
     const updateHotelInfo = await hotel.findByIdAndUpdate(
       { _id: id },

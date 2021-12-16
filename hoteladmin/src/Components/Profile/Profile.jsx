@@ -5,19 +5,17 @@ import { faBook, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomTextInput from "../reusebles/CustomTextInput";
 import HotelAPI from "../../ApiCalls/apiCalls";
-
-
+import Loading from "../Loading and Error/Loading";
 import FileBase64 from "react-file-base64";
 
 const Profile = () => {
   const navigate=useNavigate();
   const id = localStorage.getItem("userID");
-  const [data, setData] = useState({});
+  const [data, setData] = useState();
   const [email, setEmail] = useState();
   const [hotelName, setHotelName] = useState();
-  const [password, setPassword] = useState();
   const [currentPwd, setCurrentPwd] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+  const [newPassword, setNewPassword] = useState();
   const [address, setAddress] = useState();
   const [city, setCity] = useState();
   const [postalCode, setPostalCode] = useState();
@@ -39,37 +37,23 @@ const Profile = () => {
     getUserData();
   }, []);
 
-  useEffect(() => {
-    const getStarted = () => {
-      setAvatar(data?.hotelAvatar);
-      setEmail(data?.email);
-      setHotelName(data?.hotelname);
-      setPhoneNumber(data?.phonenumber);
-      setAddress(data?.hoteladdress?.address);
-      setCity(data?.hoteladdress?.city);
-      setPostalCode(data?.hoteladdress?.postalCode);
-      setCurrentPwd(data?.password);
-      setLatitude(data?.location?.latitude);
-      setLongitude(data?.location?.longitude);
-    };
-    getStarted()
-  }, [data]);
+ 
 
   const update = () => {
     const currentlocation = {
-      longitude: longitude,
-      latitude: latitude
+      longitude: longitude||data?.location?.longitude||"",
+      latitude: latitude||data?.location?.latitude||""
     };
     const fulladdress = {
-      address: address,
-      city: city,
-      postalCode: postalCode,
+      address: address||data?.hoteladdress?.address,
+      city: city||data?.hoteladdress?.city,
+      postalCode: postalCode||data?.hoteladdress?.postalCode,
       country: "RSA"
     };
     const updatedData = {
       email: email,
       hotelname: hotelName,
-      password: password,
+      password: newPassword,
       hoteladdress: fulladdress,
       location: currentlocation,
       hotelAvatar: avatar,
@@ -77,18 +61,15 @@ const Profile = () => {
     };
     setData(updatedData);
     //updaing password,make sure that update of name is unique
-    console.log("updatedData onclick", updatedData);
-    console.log("data onclick", data);
-    console.log("currentlocation", currentlocation);
+    
     HotelAPI.updateUserInfo(updatedData, data._id)
     .then((res) => {
+      console.log("update successful", res);
       navigate('/profile')
     })
     .catch((error) => console.error);
     
   };
-
-  // console.log("data", data);
 
   const getExtension = (imageString) => {
     var parts = imageString.split(".");
@@ -116,14 +97,14 @@ const Profile = () => {
       return (
         <div className="divider">
           <CustomTextInput
-            placeholder="Longitude"
+            placeholder={data?.location?.longitude||"Longitude"}
             edit={true}
             value={longitude}
             type="text"
             onChange={(text) => setLongitude(text)}
           />
           <CustomTextInput
-            placeholder="Latitude"
+            placeholder={data?.location?.latitude||"Latitude"}
             edit={true}
             value={latitude}
             type="text"
@@ -135,6 +116,12 @@ const Profile = () => {
       return null;
     }
   };
+
+console.log('data',data)
+
+  if(!data){
+    return <Loading/>
+  }
 
   return (
     <div className="profileContainer">
@@ -156,7 +143,7 @@ const Profile = () => {
               <div className="imgCont">
                 <img src={avatar} />
               </div>
-            ) : (
+            ) :  data?.hotelAvatar?(<div style={{ marginBottom: 10 }}>Upload new hotel picture</div>):(
               <div style={{ marginBottom: 10 }}>Upload hotel picture</div>
             )}
             <FileBase64
@@ -172,14 +159,14 @@ const Profile = () => {
           {/* email and hotel name  */}
           <div className="divider">
             <CustomTextInput
-              placeholder="Email"
+              placeholder={`${data?.email|| 'Email'}`}
               edit={true}
               value={email}
               type="email"
               onChange={(text) => setEmail(text)}
             />
             <CustomTextInput
-              placeholder="Hotel Name"
+              placeholder={data?.hotelname||"Hotel Name"}
               edit={true}
               value={hotelName}
               type="text"
@@ -189,14 +176,14 @@ const Profile = () => {
           {/* phone number and address*/}
           <div className="divider">
             <CustomTextInput
-              placeholder="Phone Number"
+              placeholder={data?.phonenumber||"Phone Number"}
               edit={true}
               value={phoneNumber}
               type="text"
               onChange={(text) => setPhoneNumber(text)}
             />
             <CustomTextInput
-              placeholder="Address Line 1"
+              placeholder={data?.hoteladdress?.address||"Address Line 1"}
               edit={true}
               value={address}
               type="text"
@@ -206,14 +193,14 @@ const Profile = () => {
           {/* hoteladdress */}
           <div className="divider">
             <CustomTextInput
-              placeholder="city"
+              placeholder={data?.hoteladdress?.city||"city"}
               edit={true}
               value={city}
               type="text"
               onChange={(text) => setCity(text)}
             />
             <CustomTextInput
-              placeholder="postalCode"
+              placeholder={data?.hoteladdress?.postalCode||"postalCode"}
               edit={true}
               value={postalCode}
               type="text"
@@ -241,16 +228,16 @@ const Profile = () => {
               <CustomTextInput
                 placeholder="Current Password"
                 edit={true}
-                value={password}
+                value={currentPwd}
                 type="password"
-                onChange={(text) => setPassword(text)}
+                onChange={(text) => setCurrentPwd(text)}
               />
               <CustomTextInput
                 placeholder="New Password"
                 edit={true}
-                value={confirmPassword}
+                value={newPassword}
                 type="password"
-                onChange={(text) => setConfirmPassword(text)}
+                onChange={(text) => setNewPassword(text)}
               />
             </div>
           </div>

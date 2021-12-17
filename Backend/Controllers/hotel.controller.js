@@ -9,24 +9,27 @@ dotenv.config();
 const secret = process.env.SECRATE_TOKEN;
 
 export const getHotelList = async (req, res) => {
-  const { hotelname } = req.params;
+  const { id } = req.params;
+  console.log('id',id)
   const currenthotel = await hotel.findOne({
-    hotelname
+    _id:id
   });
-  // console.log(currenthotel._id)
+  console.log("--->",currenthotel)
   if (!currenthotel) {
     return res.json({
       status: "404",
-      message: "No postings",
+      message: "please log in",
       data: []
     });
   }
-  const myListing = await Listing.find({ hotelID: currenthotel._id});
-  // console.log(myListing)
+  console.log('loading....')
+  const myListing = await Listing.find({ hotelID: id});//{ hotelID: id}
+  console.log("list--->",myListing)
 
   if(myListing.length===0){
     return res.json({message:"No postings",data:[]})
   }
+
   res.json({
     status: "200",
     message: "Posing Avalible",
@@ -44,11 +47,11 @@ export const AddNewListing = async (req, res) => {
     avaliableDate,
     facilities,
     galary,
-    paymentMethods
+    paymentMethods,
+    city
   } = req.body;
   const logedInEmail = await hotel.findOne({ _id: hotelID });
   // const logedInEmail = await hotel.findOne({ hotelname:"Relax Inn" });
-
   //check loged in user or authenticate
   if (!logedInEmail)
     return res.json({
@@ -68,7 +71,7 @@ export const AddNewListing = async (req, res) => {
     });
   }
 
-  const city = logedInEmail.hoteladdress.city;
+  // const city = logedInEmail.hoteladdress.city;
 
   const newListing = new Listing({
     hotelID,

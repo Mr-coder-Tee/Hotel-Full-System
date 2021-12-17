@@ -435,6 +435,7 @@ padding: 10px;
   box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   display: flex;
+  flex-wrap: wrap;
   padding: 10px;
 }
 .facility{
@@ -448,6 +449,7 @@ padding: 10px;
   color: white;
   justify-content: center;
   align-items: center;
+  margin: 0 1px;
 }
 .remove{
   border: none;
@@ -459,18 +461,85 @@ padding: 10px;
   width: 20%;
   height: 30%;
   margin-bottom: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  position: relative;
+  margin: 0 2px;
 }
 .galaryImgContainer img{
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .galaryInner{
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.addListingBtn{
+  border: none;
+  background-color: #0BB5FF;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 250ms ease-in-out;
+}
+.addListingBtn:hover{
+  opacity: .8;
+}
+.addBtnContainer{
+  margin-top: 20px;
+  padding: 0 20px;
+  
+}
+.abs{
+  position: absolute;
+  right: 0;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.2);
+  
+}
+.payment{
+  height: 80px;
+}
 
+
+.cardHolder{
+  margin-top: 20px;
+  padding:0 calc(50% /3);
+}
+.listingCardContainer{
+  display: flex;
+  width: 100%;
+  height: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  padding:10px;
+  position: relative;
+}
+.listingCardImageContainer{
+  width: 20%;
+  height: 100%;
+  background-color: blue;
+}
+.cardIcon{
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+ 
+  /* margin:10px; */
+  /* padding: 10px; */
+}
+.listingCardBtns{
+  position: absolute;
+  top:10px;
+  right:10px;
+}
+.deletebtn{
+background-color: #DD4B3;
+}
 
 /* ----------Listing end---------- */
+
+

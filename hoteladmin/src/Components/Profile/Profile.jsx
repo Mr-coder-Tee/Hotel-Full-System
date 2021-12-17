@@ -78,7 +78,8 @@ const Profile = () => {
   const varifyImage = (imagename, image, size) => {
     var extension = getExtension(imagename);
     if (extension === "jpg" || extension === "png" || extension === "jpeg") {
-      if (false) {
+      const imgsize=size.split(' ')
+      if (imgsize>=5242880) {
         // file must be less than 5 mb
         setFileError("Image too large(Note: Image must be 5mb or less)");
       } else {

@@ -13,6 +13,9 @@ class HotelAPI {
   }
   async getHotelListing(id){
       return axios.get(`${url}/getHotel/${id}`)
+    }
+    async addNewListing(data){
+    return axios.post(`${url}/addListing`,data)
   }
 }
 

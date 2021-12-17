@@ -20,7 +20,7 @@ const hotelListing = new Schema({
     type: String
   },
   room: {
-    bed: { type: Number },
+    beds: { type: Number },
     adults: { type: Number },
     children: { type: Number },
     rooms: {
@@ -43,22 +43,7 @@ const hotelListing = new Schema({
       type: Date
     }
   },
-  facilities: [
-    {
-      name: {
-        required: true,
-        type: String
-      },
-      iconname: {
-        required: true,
-        type: String
-      },
-      icontype: {
-        required: true,
-        type: String
-      }
-    }
-  ],
+  facilities: [String],
   galary: [String],
   postAt: {
     type: Date,

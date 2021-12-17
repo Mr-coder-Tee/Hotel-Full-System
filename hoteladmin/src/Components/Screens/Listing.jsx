@@ -3,41 +3,35 @@ import TopNav from "../reusebles/TopNav";
 import { faClipboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-
 import HotelAPI from "../../ApiCalls/apiCalls";
+import Loading from "../Loading and Error/Loading";
+import ListingCard from "../reusebles/ListingCard";
+
 
 const Listing = () => {
   const userID = localStorage.getItem("userID");
-  const navigate=useNavigate();
-  const [hotelname, setHotelName] = useState();
+  const navigate = useNavigate();
+  const [loadingbar, setLoading] = useState(true);
+  const [myListing,setMyListing]=useState([])
 
-  useEffect(() => {
-    const getHotelName = () => {
-      HotelAPI.getUserDetails(userID)
-        .then(({ data }) => {
-            const name=data.data?.hotelname.trim()
-            console.log('name: ',name)
-          setHotelName(name);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getHotelName();
-  }, []);
+  // useEffect(() => {
+  //   const get = () => {
+  //     HotelAPI.getUserDetails(userID)
+  //       .then(({ data }) => {
+  //           const name=data.data?..trim()
+  //           console.log('name: ',name)
+  //         set(name);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
+  //   get();
+  // }, []);
 
-  useEffect(()=>{
-    const getListings=()=>{
-        HotelAPI.getHotelListing(hotelname).then((data)=>{
-            console.log('listing',data)
-        }).catch((error)=>{
-            console.log('listing',error)
-        })
-    }
-    if(hotelname){
-        getListings()
-    }
-  },[hotelname])
+  // 
+  
+  
 
   return (
     <div className="lisitingContainer">
@@ -51,9 +45,15 @@ const Listing = () => {
       <div className="listingRowone">
         <h3>Lisings</h3>
         <div>
-          <button className="addBtn" onClick={()=>navigate('/Listing/add')}>+add room</button>
+          <button className="addBtn" onClick={() => navigate("/Listing/add")}>
+            +add room
+          </button>
         </div>
       </div>
+      <div className="cardHolder">
+      <ListingCard/>
+        {/* {!loadingbar ? <ListingCard/> : <Loading />} */}
+        </div>
     </div>
   );
 };

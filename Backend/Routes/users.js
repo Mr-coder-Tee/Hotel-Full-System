@@ -11,7 +11,7 @@ UserRouter.route('/update/:id').post(auth,updateUserDetails)
 UserRouter.route('/booking').post(auth,booking);
 UserRouter.route('/trips/:userid/:hotelid').get(auth,mytrips);
 UserRouter.route('/history/:userid/:hotelid').get(auth,history);
-UserRouter.route('/getTrips/:id').get(auth,getAllTrips);
+UserRouter.route('/getTrips/:id').get(auth,getAllTrips); 
 
 
 

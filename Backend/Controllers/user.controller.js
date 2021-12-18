@@ -42,7 +42,7 @@ export const SignUp = async (req, res) => {
 
   const allReadyRegistered = await UserModel.findOne({ email });
 
-  if (allReadyRegistered) {
+  if (allReadyRegistered) { 
     return res.json({
       message: "Email already registered!"
     });

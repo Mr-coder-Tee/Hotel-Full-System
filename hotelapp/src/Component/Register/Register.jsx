@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -17,11 +17,18 @@ const buttonBorderRadius = buttonLengths / 2;
 const screenHieght = Dimensions.get("screen").height;
 const paintHeight = screenHieght * 0.3;
 
-const Register = ({navigation}) => {
-  const [passView,setPassView]=useState(true)
+const Register = ({ navigation }) => {
+  const [passView, setPassView] = useState(true);
+  const [email, setEmail] = useState();
+  const [phonenumber, setPhoneNumber] = useState();
+  const [name, setName] = useState();
+  const [password, setPassword] = useState();
 
   const PasswordToggle = () => (
-    <TouchableOpacity activeOpacity={0.7} onPress={()=>setPassView(!passView)}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={() => setPassView(!passView)}
+    >
       {passView ? (
         <Icon name="eye" type="font-awesome" style={{ marginRight: 10 }} />
       ) : (
@@ -41,6 +48,8 @@ const Register = ({navigation}) => {
         <View style={styles.contentView}>
           <Text style={{ ...FONTS.h1, marginBottom: 10 }}> Get Started</Text>
           <Input
+            value={name}
+            onChangeText={(e) => console.log(e)}
             leftIcon={
               <Icon
                 name="user-circle"
@@ -60,6 +69,8 @@ const Register = ({navigation}) => {
             }}
           />
           <Input
+            value={email}
+            onChangeText={(e) => console.log(e)}
             leftIcon={
               <Icon name="at" type="font-awesome" style={{ marginRight: 10 }} />
             }
@@ -75,6 +86,8 @@ const Register = ({navigation}) => {
             }}
           />
           <Input
+            value={phonenumber}
+            onChangeText={(e) => console.log(e)}
             leftIcon={
               <Icon
                 name="phone"
@@ -94,6 +107,8 @@ const Register = ({navigation}) => {
             }}
           />
           <Input
+            value={password}
+            onChangeText={(e) => console.log(e)}
             leftIcon={
               <Icon
                 name="lock"
@@ -125,7 +140,7 @@ const Register = ({navigation}) => {
           >
             <Text style={{ ...FONTS.body1, marginBottom: 10 }}>Sign up</Text>
             <Button
-            onPress={()=>navigation.navigate('HomePage')}
+              onPress={() => navigation.navigate("HomePage")}
               icon={
                 <Icon
                   name="long-arrow-right"
@@ -152,7 +167,7 @@ const Register = ({navigation}) => {
             }}
           >
             <Text style={{ ...FONTS.body2 }}>Already Have an account?</Text>
-            <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
               <Text style={{ ...FONTS.body2, color: COLORS.textLinks }}>
                 Sign in
               </Text>
